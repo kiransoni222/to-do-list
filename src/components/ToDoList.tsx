@@ -17,51 +17,51 @@ const ToDoList = (props: ToDoListProps) => {
   const dispatch = useDispatch();
   const todos = useSelector((state: TodoState) => state.todos);
 
-  const [editableIndex, setEditableIndex] = useState<number | null>(null);
+  const [editableId, setEditableId] = useState<number | null>(null);
   const [editedText, setEditedText] = useState<string>("");
 
-  const handleToggleComplete = (index: number) => {
-    dispatch(toggleIsComplete(index));
-    setEditableIndex(null);
+  const handleToggleComplete = (id: number) => {
+    dispatch(toggleIsComplete(id));
+    setEditableId(null);
   };
 
-  const handleDeleteTodo = (index: number) => {
-    dispatch(deleteTodo(index));
-    setEditableIndex(null);
+  const handleDeleteTodo = (id: number) => {
+    dispatch(deleteTodo(id));
+    setEditableId(null);
   };
 
-  const handleEdit = (index: number) => {
-    setEditableIndex(index);
-    setEditedText(todos[index].text);
+  const handleEdit = (id: number) => {
+    setEditableId(id);
+    setEditedText(todos[id].text);
   };
 
-  const handleSaveEdit = (index: number) => {
-    dispatch(editTodo(index, editedText));
-    setEditableIndex(null);
+  const handleSaveEdit = (todo: Todo) => {
+    dispatch(editTodo(todo));
+    setEditableId(null);
   };
 
   const handleCancelEdit = () => {
-    setEditableIndex(null);
+    setEditableId(null);
   };
 
   return (
     <ul>
       {props.todoListItems &&
-        props.todoListItems.map((todo, index) => {
+        props.todoListItems.map((todo) => {
           const actionsStyle = todo.done
             ? "opacity-50 cursor-not-allowed"
             : "opacity-100";
           return (
-            <li key={index} className="flex mb-4 bg-gray-100">
+            <li key={todo.id} className="flex mb-4 bg-gray-100">
               <div className="w-3/4 h-12 text-left flex items-center">
                 <input
                   type="checkbox"
                   className="accent-slate-400 w-1/5"
-                  id={`${index}-todoCheck`}
+                  id={`${todo.id}-todoCheck`}
                   checked={todo.done}
-                  onChange={() => handleToggleComplete(index)}
+                  onChange={() => handleToggleComplete(todo.id)}
                 />
-                {editableIndex === index ? (
+                {editableId === todo.id ? (
                   <span className="w-2/3">
                     <input
                       className={`shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${actionsStyle}`}
@@ -71,15 +71,15 @@ const ToDoList = (props: ToDoListProps) => {
                     />
                   </span>
                 ) : (
-                  <label htmlFor={`${index}-todoCheck`}>{todo.text}</label>
+                  <label htmlFor={`${todo.id}-todoCheck`}>{todo.text}</label>
                 )}
               </div>
               <div className="w-1/4 h-12 flex items-center">
-                {editableIndex === index && (
+                {editableId === todo.id && (
                   <>
                     <button
                       className="w-1/4 p-0 focus:outline-none"
-                      onClick={() => handleSaveEdit(index)}
+                      onClick={() => handleSaveEdit(todo)}
                     >
                       <CheckIcon className="h-5 w-5" />
                     </button>
@@ -90,15 +90,14 @@ const ToDoList = (props: ToDoListProps) => {
                 )}
                 <button
                   className={`w-1/4 ${actionsStyle} p-0 focus:outline-none`}
-                  onClick={() => handleEdit(index)}
+                  onClick={() => handleEdit(todo.id)}
                   disabled={todo.done}
                 >
                   <PencilIcon className="h-5 w-5" />
                 </button>
                 <button
-                  className={`w-1/4 ${actionsStyle} p-0 focus:outline-none`}
-                  onClick={() => handleDeleteTodo(index)}
-                  disabled={todo.done}
+                  className={`w-1/4 p-0 focus:outline-none`}
+                  onClick={() => handleDeleteTodo(todo.id)}
                 >
                   <TrashIcon className="h-5 w-5" />
                 </button>

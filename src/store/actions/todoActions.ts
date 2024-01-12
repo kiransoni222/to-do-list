@@ -6,19 +6,19 @@ export const addTodo = (todo: Todo) => ({
   payload: todo,
 });
 
-export const editTodo = (index: number, text: string) => ({
+export const editTodo = (todo: Todo) => ({
   type: EDIT_TODO,
-  payload: { index, text },
+  payload: todo,
 });
 
-export const deleteTodo = (index: number) => ({
+export const deleteTodo = (id: number) => ({
   type: DELETE_TODO,
-  payload: index,
+  payload: id,
 });
 
-export const toggleIsComplete = (index: number) => ({
+export const toggleIsComplete = (id: number) => ({
   type: TOGGLE_COMPLETE,
-  payload: index,
+  payload: id,
 });
 
 export const setFilter = (filter: string) => ({

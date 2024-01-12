@@ -8,7 +8,7 @@ const AddToDO = () => {
 
   const addNewTodoItem = () => {
     if (addedItem.trim() !== "") {
-      dispatch(addTodo({ text: addedItem, done: false }));
+      dispatch(addTodo({ id: Math.random(), text: addedItem, done: false }));
       setAddedItem("");
     }
   };

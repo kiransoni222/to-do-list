@@ -22,28 +22,30 @@ const todoReducer = (state = initialState, action: any): TodoState => {
       };
 
     case EDIT_TODO:
-      const { index, text } = action.payload;
+      const { id, text } = action.payload;
       return {
         ...state,
-        todos: state.todos.map((todo, i) =>
-          i === index ? { ...todo, text } : todo
+        todos: state.todos.map((todo) =>
+          todo.id === id ? { ...todo, text } : todo
         ),
       };
 
     case TOGGLE_COMPLETE:
       return {
         ...state,
-        todos: state.todos.map((todo, index) =>
-          index === action.payload
-            ? { ...todo, done: !todo.done }
-            : todo
+        todos: state.todos.map((todo) => {
+          return todo.id === action.payload
+          ? { ...todo, done: !todo.done }
+          : todo
+        }
+          
         ),
       };
 
     case DELETE_TODO:
       return {
         ...state,
-        todos: state.todos.filter((_, index) => index !== action.payload),
+        todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
 
     case SET_FILTER:

@@ -1,5 +1,3 @@
-# To Do List
-
 # To Do List Project Setup
 
 A step by step guide to setup To Do List project
