@@ -6,6 +6,29 @@ import AddToDO from "./AddToDo";
 import ToDoList from "./ToDoList";
 import { TodoState } from "@shared/interface";
 
+const FilterElement = (props: {
+  selectedFilter: string;
+  filterText: string;
+  onChange: (text: string) => void;
+}) => {
+  return (
+    <li
+      className={`mr-1 w-full cursor-pointer ${
+        props.selectedFilter === props.filterText
+          ? " bg-gray-200"
+          : "border-white"
+      }`}
+    >
+      <a
+        className="inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
+        onClick={() => props.onChange(props.filterText)}
+      >
+        {props.filterText}
+      </a>
+    </li>
+  );
+};
+
 const ToDo: React.FC = () => {
   const dispatch = useDispatch();
   const todoItems = useSelector((state: TodoState) => state.todos);
@@ -33,54 +56,28 @@ const ToDo: React.FC = () => {
     <>
       <AddToDO />
       <div className="mt-5 max-w-lg rounded border border-gray-400 divide-gray-100">
-      <ul className="flex justify-evenly">
-        <li
-          className={`mr-1 w-full cursor-pointer ${
-            filter === FilterEnums.All ? " bg-gray-200" : "border-white"
-          }`}
-        >
-          <a
-            className="inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
-            onClick={() => handleFilterChange(FilterEnums.All)}
-          >
-            All
-          </a>
-        </li>
-        <li
-          className={`mr-1 w-full cursor-pointer ${
-            filter === FilterEnums.Active
-              ? "border-r mr-1 bg-gray-200"
-              : "border-white"
-          }`}
-        >
-          <a
-            className="inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
-            onClick={() => handleFilterChange(FilterEnums.Active)}
-          >
-            Active
-          </a>
-        </li>
-        <li
-          className={`mr-1 w-full cursor-pointer  ${
-            filter === FilterEnums.Done ? " bg-gray-200" : "border-white"
-          }`}
-        >
-          <a
-            className="inline-block py-2 px-4 text-blue-500 hover:text-blue-800 font-semibold"
-            onClick={() => handleFilterChange(FilterEnums.Done)}
-          >
-            Done
-          </a>
-        </li>
-      </ul>
-      {totalItems ? (
-        <div className="p-4 max-w-lg rounded border border-gray-400 divide-gray-100">
-          <div className="text-left mb-3 font-bold">{totalItems} {totalItems === 1 ? 'task' : 'tasks'}</div>
-          <ToDoList todoListItems={filteredTodos()} />
-        </div>
-      ) : (
-        <></>
-      )}
+        <ul className="flex justify-evenly">
+          {Object.keys(FilterEnums).map((filterObj, index) => {
+            return (
+              <FilterElement
+                key={index}
+                selectedFilter={filter}
+                filterText={filterObj}
+                onChange={(text) => handleFilterChange(text)}
+              />
+            );
+          })}
+        </ul>
+        {totalItems ? (
+          <div className="p-4 max-w-lg rounded border border-gray-400 divide-gray-100">
+            <div className="text-left mb-3 font-bold">
+              {totalItems} {totalItems === 1 ? "task" : "tasks"}
+            </div>
+            <ToDoList todoListItems={filteredTodos()} />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
