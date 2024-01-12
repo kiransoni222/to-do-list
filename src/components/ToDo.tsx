@@ -68,16 +68,18 @@ const ToDo: React.FC = () => {
             );
           })}
         </ul>
-        {totalItems ? (
-          <div className="p-4 max-w-lg rounded border border-gray-400 divide-gray-100">
-            <div className="text-left mb-3 font-bold">
-              {totalItems} {totalItems === 1 ? "task" : "tasks"}
-            </div>
-            <ToDoList todoListItems={filteredTodos()} />
-          </div>
-        ) : (
-          <></>
-        )}
+        <div className="p-4 max-w-lg rounded border border-gray-400 divide-gray-100">
+          {totalItems ? (
+            <>
+              <div className="text-left mb-3 font-bold">
+                {totalItems} {totalItems === 1 ? "task" : "tasks"}
+              </div>
+              <ToDoList todoListItems={filteredTodos()} />
+            </>
+          ) : (
+            <>No Tasks</>
+          )}
+        </div>
       </div>
     </>
   );
