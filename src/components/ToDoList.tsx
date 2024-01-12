@@ -45,7 +45,7 @@ const ToDoList = (props: ToDoListProps) => {
   };
 
   return (
-    <ul className="p-4 max-w-lg rounded border border-gray-400 divide-gray-100">
+    <ul>
       {props.todoListItems &&
         props.todoListItems.map((todo, index) => {
           const actionsStyle = todo.done

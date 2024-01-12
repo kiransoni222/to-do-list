@@ -30,9 +30,10 @@ const ToDo: React.FC = () => {
 
   const totalItems = filteredTodos().length;
   return (
-    <div>
+    <>
       <AddToDO />
-      <ul className="flex border-b justify-evenly mt-5 mb-5">
+      <div className="mt-5 max-w-lg rounded border border-gray-400 divide-gray-100">
+      <ul className="flex justify-evenly">
         <li
           className={`mr-1 w-full cursor-pointer ${
             filter === FilterEnums.All ? " bg-gray-200" : "border-white"
@@ -72,9 +73,16 @@ const ToDo: React.FC = () => {
           </a>
         </li>
       </ul>
-      <div>Total Items: {totalItems}</div>
-      {totalItems ? <ToDoList todoListItems={filteredTodos()} /> : <></>}
-    </div>
+      {totalItems ? (
+        <div className="p-4 max-w-lg rounded border border-gray-400 divide-gray-100">
+          <div className="text-left mb-3 font-bold">{totalItems} {totalItems === 1 ? 'task' : 'tasks'}</div>
+          <ToDoList todoListItems={filteredTodos()} />
+        </div>
+      ) : (
+        <></>
+      )}
+      </div>
+    </>
   );
 };
 
