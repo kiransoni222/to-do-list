@@ -20,7 +20,7 @@ const AddToDO = () => {
         type="text"
         value={addedItem}
         onChange={(e) => setAddedItem(e.target.value)}
-      ></input>
+      />
       <button
         className="w-full bg-gray-400 font-bold py-2 px-4 rounded"
         onClick={addNewTodoItem}
