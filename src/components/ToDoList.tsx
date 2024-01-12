@@ -53,6 +53,9 @@ const ToDoList = (props: ToDoListProps) => {
       <ul>
         {props.todoListItems &&
           props.todoListItems.map((todo) => {
+            const actionsStyle = todo.done
+            ? "opacity-50 cursor-not-allowed"
+            : "opacity-100";
             return (
               <li key={todo.id} className="flex mb-4 bg-gray-100">
                 <div className="w-3/4 h-12 text-left flex items-center">
@@ -95,7 +98,7 @@ const ToDoList = (props: ToDoListProps) => {
                   )}
                   {filter !== FilterEnums.Done && (
                     <button
-                      className={`w-1/4 p-0 focus:outline-none`}
+                      className={`w-1/4 p-0 focus:outline-none ${actionsStyle}`}
                       onClick={() => handleEdit(todo.id)}
                       disabled={todo.done}
                     >
