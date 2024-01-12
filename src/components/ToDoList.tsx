@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleIsComplete, deleteTodo, editTodo } from "@actions/todoActions";
-import { Todo, TodoState } from "@reducers/todoReducer";
 import {
   CheckIcon,
   PencilIcon,
   TrashIcon,
   XMarkIcon,
 } from "@heroicons/react/16/solid";
+import { Todo, TodoState } from "@shared/interface";
 
 interface ToDoListProps {
   todoListItems: Todo[];
