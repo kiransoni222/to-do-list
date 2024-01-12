@@ -6,10 +6,10 @@ A step by step guide to setup To Do List project
 
 ```bash
 # Change the user name `user_name`.
-$ git clone https://github.com/user_name/to-do-list.git
+$ git clone https://github.com/kiransoni222/to-do-list.git
 
 # Change directory to source.
-$ cd project_name
+$ cd to-do-list
 
 # You need to install dependencies.
 $ npm install
