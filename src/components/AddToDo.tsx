@@ -7,8 +7,10 @@ const AddToDO = () => {
   const dispatch = useDispatch();
 
   const addNewTodoItem = () => {
-    dispatch(addTodo({ text: addedItem, completed: false }));
-    setAddedItem("");
+    if (addedItem.trim() !== "") {
+      dispatch(addTodo({ text: addedItem, done: false }));
+      setAddedItem("");
+    }
   };
 
   return (
@@ -19,7 +21,12 @@ const AddToDO = () => {
         value={addedItem}
         onChange={(e) => setAddedItem(e.target.value)}
       ></input>
-      <button className="w-full bg-gray-400 font-bold py-2 px-4 rounded" onClick={addNewTodoItem}>Add</button>
+      <button
+        className="w-full bg-gray-400 font-bold py-2 px-4 rounded"
+        onClick={addNewTodoItem}
+      >
+        Add
+      </button>
     </>
   );
 };

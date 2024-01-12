@@ -9,7 +9,7 @@ const store = createStore(todoReducer);
 function App() {
   return (
     <Provider store={store}>
-      <div className="max-w-md w-full mx-auto my-0 rounded overflow-hidden shadow-lg">
+      <div className="max-w-lg w-full mx-auto my-0 rounded overflow-hidden shadow-lg">
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">To Do List</div>
           <p className="text-gray-700 text-base">What needs to be done?</p>

@@ -1,6 +1,7 @@
+import { Todo } from "@shared/interface";
 import { ADD_TODO, DELETE_TODO, EDIT_TODO, SET_FILTER, TOGGLE_COMPLETE } from "../constants/todoConstants";
 
-export const addTodo = (todo: { text: string; completed: boolean }) => ({
+export const addTodo = (todo: Todo) => ({
   type: ADD_TODO,
   payload: todo,
 });

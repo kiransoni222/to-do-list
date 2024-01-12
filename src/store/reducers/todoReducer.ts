@@ -6,16 +6,7 @@ import {
   SET_FILTER,
   TOGGLE_COMPLETE,
 } from "../constants/todoConstants";
-
-export interface Todo {
-  text: string;
-  completed: boolean;
-}
-
-export interface TodoState {
-  todos: Todo[];
-  filter: string;
-}
+import { TodoState } from "@shared/interface";
 
 const initialState: TodoState = {
   todos: [],
@@ -44,7 +35,7 @@ const todoReducer = (state = initialState, action: any): TodoState => {
         ...state,
         todos: state.todos.map((todo, index) =>
           index === action.payload
-            ? { ...todo, completed: !todo.completed }
+            ? { ...todo, done: !todo.done }
             : todo
         ),
       };
